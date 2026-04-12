@@ -2,7 +2,7 @@ import json
 import random
 import pandas as pd
 
-def random_sample(sample_fraction=0.1):
+def random_sample(sample_fraction=0.1, save=True):
     """
     Generates a random sample (without replacement) of the data so we can parse it quicker than using the full 5GB file.
     The random seed is used so we can explore the same data.
@@ -11,9 +11,10 @@ def random_sample(sample_fraction=0.1):
 
     Prams:
         sample_fraction(0.1): The percentage used to sample the data in decimal form (i.e. 0.1 = 10%)
+        save(True): Will save the DataFrame to a parquet in the working directory if True
 
     Returns:
-        Null (Saves the file in working directory)
+        DataFrame of the sample data
     """
     random.seed(42)
     
@@ -25,7 +26,10 @@ def random_sample(sample_fraction=0.1):
                 sample.append(json.loads(line))
     
     df_sample = pd.DataFrame(sample)
-    df_sample.to_parquet("./arxiv_sample.parquet", index=False)
+    if save:  
+        df_sample.to_parquet("./arxiv_sample.parquet", index=False)
+
+    return df_sample
 
 
 
