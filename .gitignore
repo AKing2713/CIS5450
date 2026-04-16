@@ -4,3 +4,4 @@ arxiv_sample.parquet
 __pycache__/
 abstracts_parsed.parquet
 abstracts_parsed_full.parquet
+arxiv_data.parquet
